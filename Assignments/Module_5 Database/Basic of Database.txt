@@ -1,0 +1,138 @@
+                                    Module 5 (Database)
+                                    Basic Of Database
+
+1. What do you understand By Database
+->A database is an organized collection of data, so that it can be easily accessed and managed.You can organize data into tables, rows, columns, and index it to make it easier to find relevant information.Database handlers create a database in such a way that only one set of software program provides access of data to all the users.The main purpose of the database is to operate a large amount of information by storing, retrieving, and managing data.
+
+2. What is Normalization?
+->Normalization is the process of organizing the data in the database.
+Normalization is used to minimize the redundancy from a relation or set of relations.It is also used to eliminate undesirable characteristics like Insertion, Update, and Deletion Anomalies.Normalization divides the larger table into smaller and links them using relationships.The normal form is used to reduce redundancy from the database table.
+->Types of Normal Forms:
+1NF:- A relation is in 1NF if it contains an atomic value.
+2NF:- A relation will be in 2NF if it is in 1NF and all non-key attributes are fully functional dependent on the primary key.
+3NF:- A relation will be in 3NF if it is in 2NF and no transition dependency exists.
+BCNF:- A stronger definition of 3NF is known as Boyce Codd's normal form.
+
+3. What is Difference between DBMS and RDBMS?
+	DBMS								RDBMS
+DBMS stores data as file.					RDBMS stores data in tabular form.
+Data elements need to access individually.			Multiple data elements can be accessed at the same time.
+No relationship between data.					Data is stored in the form of tables which are related to each other.
+Normalization is not present.					Normalization is present.
+DBMS does not support distributed database.			RDBMS supports distributed database.
+It stores data in either a navigational or hierarchical form. 	It uses a tabular structure where the headers are the column names, and the rows contain corresponding values.
+It deals with small quantity of data.				It deals with large amount of data.
+Data redundancy is common in this model.			Keys and indexes do not allow Data redundancy.
+It is used for small organization and deal with small data.	It is used to handle large amount of data.
+Not all Codd rules are satisfied.				All 12 Codd rules are satisfied.
+Security is less						More security measures provided.
+It supports single user.					It supports multiple users.
+Data fetching is slower for the large amount of data.		Data fetching is fast because of relational approach.
+Low software and hardware necessities.				Higher software and hardware necessities.
+Examples: XML, Window Registry, Forxpro, dbaseIIIplus etc.	Examples: MySQL, PostgreSQL, SQL Server, Oracle, Microsoft Access etc.
+
+4. What is MF Cod Rule of RDBMS Systems?
+->A DB that solely contains a relational data model cannot be called a Relational DB Management System or RDBMS. 
+Some rules determine if a DB is the correct RDBMS. Dr Edgar F. Codd, who has extensive knowledge on the DB system’s Relational Model, proposed these principles in 1985. 
+A DB that follows the rule is referred to as a real relational DB management system (RDBMS).Codd’s rules are a set of rules that are widely used in relational DB’s.
+
+The Rules are following:
+Rule 0: The Foundation Rule
+Rule 1: The Information Rule
+Rule 2: The Guaranteed Access Rule
+Rule 3: The Systematic Treatment of Null Values
+Rule 4: The Dynamic/Active Online Catalog on the basis of the Relational Model
+Rule 5: The Comprehensive Data SubLanguage Rule
+Rule 6: The View Updating Rule
+Rule 7: The Relational Level Operation (or High-Level Insert, Delete, and Update) Rule
+Rule 8: The Physical Data Independence Rule
+Rule 9: The Logical Data Independence Rule
+Rule 10: The Integrity Independence Rule
+Rule 11: The Distribution Independence Rule
+Rule 12: The Non-Subversion Rule
+
+5. What do you understand By Data Redundancy?
+->Data redundancy occurs when identical copies of the same data are stored in multiple locations, leading to a range of problems. 
+This redundancy can manifest in various ways,such as repeated entry of data records in different folders, databases, or software platforms. 
+The consequences of data redundancy include errors that are unacceptable to customers and businesses.
+
+6. What is DDL Interpreter?
+->Data Definition Language (DDL) statements are used to define the structure of the database schema.
+ This includes creating and modifying database objects such as tables, indexes, views, and constraints. 
+Examples of DDL statements include CREATE, ALTER, DROP, TRUNCATE, etc.
+DDL statements:-
+CREATE: Used to create new database objects like tables, views, indexes, etc.
+ALTER: Modifies the structure of existing database objects.
+DROP: Deletes database objects (tables, views, indexes, etc.) from the database.
+TRUNCATE: Removes all records from a table without removing the table structure itself.
+COMMENT: Adds comments to the data dictionary about database objects.
+
+7. What is DML Compiler in SQL?
+-> Data Manipulation Language (DML) statements in SQL are used to retrieve, insert, update, and delete data from a database. 
+These statements allow users and applications to interact with the data stored in tables within the database. 
+Examples of DML statements include INSERT, UPDATE, DELETE, etc.
+
+DML statements:-
+INSERT: Adds new rows of data into a table.
+UPDATE: Modifies existing data within a table.
+DELETE: Removes rows of data from a table.
+
+8. What is SQL Key Constraints writing an Example of SQL Key Constraints
+->SQL constraints are used to specify rules for the data in a table.
+Constraints are used to limit the type of data that can go into a table. 
+This ensures the accuracy and reliability of the data in the table. 
+If there is any violation between the constraint and the data action, the action is aborted.
+Constraints can be column level or table level.
+Column level constraints apply to a column, and table level constraints apply to the whole table.
+
+The following constraints are commonly used in SQL:
+
+NOT NULL - Ensures that a column cannot have a NULL value
+UNIQUE - Ensures that all values in a column are different
+PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+FOREIGN KEY - Prevents actions that would destroy links between tables
+CHECK - Ensures that the values in a column satisfies a specific condition
+DEFAULT - Sets a default value for a column if no value is specified
+CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+9. What is save Point? How to create a save Point write a Query?
+->SAVEPOINT creates points within the groups of transactions in which to ROLLBACK. 
+It is a point in a transaction in which you can roll the transaction back to a certain point without rolling back the entire transaction. 
+Syntax: 
+SAVEPOINT SAVEPOINT_NAME;
+
+This command is used only in the creation of SAVEPOINT among all the transactions. 
+In general ROLLBACK is used to undo a group of transactions. 
+Syntax for rolling back to Savepoint Command: 
+ROLLBACK TO SAVEPOINT_NAME;
+
+you can ROLLBACK to any SAVEPOINT at any time to return the appropriate data to its original state.
+
+10.What is trigger and how to create a Trigger in SQL?
+->A trigger is a stored procedure in a database that automatically invokes whenever a special event in the database occurs. 
+For example, a trigger can be invoked when a row is inserted into a specified table or when specific table columns are updated. 
+In simple words, a trigger is a collection of SQL statements with particular names that are stored in system memory. 
+It belongs to a specific class of stored procedures that are automatically invoked in response to database server events. 
+Every trigger has a table attached to it.Because a trigger cannot be called directly, unlike a stored procedure, it is referred to as a special procedure.
+A trigger is automatically called whenever a data modification event against a table takes place,which is the main distinction between a trigger and a procedure. 
+On the other hand, a stored procedure must be called directly.
+
+The following are the key differences between triggers and stored procedures:
+
+1.Triggers cannot be manually invoked or executed.
+2.There is no chance that triggers will receive parameters.
+3.A transaction cannot be committed or rolled back inside a trigger.
+
+Syntax:
+
+create trigger [trigger_name] 
+
+[before | after]  
+
+{insert | update | delete}  
+
+on [table_name]  
+
+[for each row]  
+
+[trigger_body] 

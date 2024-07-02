@@ -1,0 +1,48 @@
+Q.1 Create Table Name : Student and Exam
+-> For Student table:-
+-->mysql>create table student(Rollno int primary key,Name varchar(20)not null,Branch varchar(20)not null);
+
+mysql> show tables;
++----------------+
+| Tables_in_yogu |
++----------------+
+| student        |
++----------------+
+
+-->mysql> insert into student(Rollno,Name,Branch) values(1,"Yogesh","Computer Science"),
+	  (2,"Dharmin","Electronic and Com"),(3,"Muaaz","Electronic and Com");
+
+-->mysql> select * from student;
++--------+---------+--------------------+
+| Rollno | Name    | Branch             |
++--------+---------+--------------------+
+|      1 | Yogesh  | Computer Science   |
+|      2 | Dharmin | Electronic and Com |
+|      3 | Muaaz   | Electronic and Com |
++--------+---------+--------------------+
+
+For Exam table:-
+mysql> create table Exam(Rollno int,S_code varchar(10)not null,Marks int not null,P_code varchar(10),FOREIGN KEY (Rollno) REFERENCES student(Rollno));
+-> mysql> show tables;
++----------------+
+| Tables_in_yogu |
++----------------+
+| exam           |
+| student        |
++----------------+
+
+->mysql> insert into Exam (Rollno, S_code, Marks, P_code) VALUES ('1', 'CS11', 50, 'CS'),('1', 'CS12', 60, 'CS'),('2', 'EC101', 66, 'EC'),('2', 'EC102', 66, 'EC'),('3', 'EC101', 45, 'EC'),('3', 'EC102', 50, 'EC');
+
+->mysql> select * from exam;
++--------+--------+-------+--------+
+| Rollno | S_code | Marks | P_code |
++--------+--------+-------+--------+
+|      1 | CS11   |    50 | CS     |
+|      1 | CS12   |    60 | CS     |
+|      2 | EC101  |    66 | EC     |
+|      2 | EC102  |    66 | EC     |
+|      3 | EC101  |    45 | EC     |
+|      3 | EC102  |    50 | EC     |
++--------+--------+-------+--------+
+
+

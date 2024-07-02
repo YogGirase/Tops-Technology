@@ -1,0 +1,99 @@
+Q.11 Create table given below: Salesperson and Customer
+->Create Table Salesperson:-
+->mysql> create table Salesperson(SNo int primary key,SNAME varchar(20),CITY varchar(50),COMM int);
+
+->mysql> describe salesperson;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| SNo   | int         | NO   | PRI | NULL    |       |
+| SNAME | varchar(20) | YES  |     | NULL    |       |
+| CITY  | varchar(50) | YES  |     | NULL    |       |
+| COMM  | float       | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+->mysql>insert into salesperson values(1001, 'Peel', 'London', .12),(1002, 'Serres', 'San Jose', .13),(1004, 'Motika', 'London', .11),(1007, 'Rafkin', 'Barcelona', .15),(1003, 'Axelrod', 'New York', .1);
+
+->mysql> select * from salesperson;
++------+---------+-----------+------+
+| SNo  | SNAME   | CITY      | COMM |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1003 | Axelrod | New York  |  0.1 |
+| 1004 | Motika  | London    | 0.11 |
+| 1007 | Rafkin  | Barcelona | 0.15 |
++------+---------+-----------+------+
+
+->Create Customer Table:-
+->mysql> create table Customer(CNM int primary key,CNAME varchar(20),CITY varchar(20),RATING int,SNo int,foreign key(SNo) references Salesperson(SNo));
+->mysql> describe customer;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| CNM    | int         | NO   | PRI | NULL    |       |
+| CNAME  | varchar(20) | YES  |     | NULL    |       |
+| CITY   | varchar(20) | YES  |     | NULL    |       |
+| RATING | int         | YES  |     | NULL    |       |
+| SNo    | int         | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+
+->mysql>insert into customer values(201,"Hoffman","London",100,1001),(202,"Giovanne","Roe",200,1003),(203,"Liu","San Jose",300,1002),(204,"Grass","Barcelona",100,1002),(206,"Clemens","London",300,1007),(207,"Pereira","Roe",100,1004);
+
+->mysql> select * from customer;
++-----+----------+-----------+--------+------+
+| CNM | CNAME    | CITY      | RATING | SNo  |
++-----+----------+-----------+--------+------+
+| 201 | Hoffman  | London    |    100 | 1001 |
+| 202 | Giovanne | Roe       |    200 | 1003 |
+| 203 | Liu      | San Jose  |    300 | 1002 |
+| 204 | Grass    | Barcelona |    100 | 1002 |
+| 206 | Clemens  | London    |    300 | 1007 |
+| 207 | Pereira  | Roe       |    100 | 1004 |
++-----+----------+-----------+--------+------+
+
+Q.12 Retrieve the below data from above table:-
+
+Q.13 All Customer name whose rating is more than 100.
+->mysql> select CNAME,RATING from customer where rating > 100;
++----------+--------+
+| CNAME    | RATING |
++----------+--------+
+| Giovanne |    200 |
+| Liu      |    300 |
+| Clemens  |    300 |
++----------+--------+
+
+Q.14 Names and cities of all salespeople in London with commission above 0.12
+->mysql> select SNAME,CITY from salesperson where city='london' and comm>0.12;
+Empty set (0.00 sec)
+
+Q.15 All salespeople either in Barcelona or in London
+->mysql> select * from salesperson where city in ('barcelona','london');
++------+--------+-----------+------+
+| SNo  | SNAME  | CITY      | COMM |
++------+--------+-----------+------+
+| 1001 | Peel   | London    | 0.12 |
+| 1004 | Motika | London    | 0.11 |
+| 1007 | Rafkin | Barcelona | 0.15 |
++------+--------+-----------+------+
+
+Q.16 All salespeople with commission between 0.10 and 0.12. (Boundary valuesshould be excluded).
+->mysql> select *from salesperson where comm>0.10 and comm<0.12;
++------+---------+----------+------+
+| SNo  | SNAME   | CITY     | COMM |
++------+---------+----------+------+
+| 1001 | Peel    | London   | 0.12 |
+| 1003 | Axelrod | New York |  0.1 |
+| 1004 | Motika  | London   | 0.11 |
++------+---------+----------+------+
+
+Q.17 All customers excluding those with rating <= 100 unless they are located in Rome
+->mysql> select *from customer where rating > 100 or (rating <= 100 AND city = 'Rome');
++-----+----------+----------+--------+------+
+| CNM | CNAME    | CITY     | RATING | SNo  |
++-----+----------+----------+--------+------+
+| 202 | Giovanne | Roe      |    200 | 1003 |
+| 203 | Liu      | San Jose |    300 | 1002 |
+| 206 | Clemens  | London   |    300 | 1007 |
++-----+----------+----------+--------+------+

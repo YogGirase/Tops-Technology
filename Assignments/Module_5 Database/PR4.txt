@@ -1,0 +1,193 @@
+Q.18 Write a SQL statement that displays all the information about all salespeople
+-> create table salesperson:-
+->mysql> create table salespeople(salesman_id int primary key,name varchar(20),city varchar(20),commission decimal(3,2));
+Query OK, 0 rows affected (0.03 sec)
+
+->mysql> describe salespeople;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| salesman_id | int          | NO   | PRI | NULL    |       |
+| name        | varchar(20)  | YES  |     | NULL    |       |
+| city        | varchar(20)  | YES  |     | NULL    |       |
+| commission  | decimal(3,2) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+->mysql> insert into salespeople values(5001, 'James Hoog', 'New York', 0.15),(5002, 'Nail Knite', 'Paris', 0.13),(5005, 'Pit Alex', 'London', 0.11),(5006, 'Mc Lyon', 'Paris', 0.14),(5007, 'Paul Adam', 'Rome', 0.13),(5003, 'Lauson Hen', 'San Jose', 0.12);
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+->mysql> select * from salespeople;
++-------------+------------+----------+------------+
+| salesman_id | name       | city     | commission |
++-------------+------------+----------+------------+
+|        5001 | James Hoog | New York |       0.15 |
+|        5002 | Nail Knite | Paris    |       0.13 |
+|        5003 | Lauson Hen | San Jose |       0.12 |
+|        5005 | Pit Alex   | London   |       0.11 |
+|        5006 | Mc Lyon    | Paris    |       0.14 |
+|        5007 | Paul Adam  | Rome     |       0.13 |
++-------------+------------+----------+------------+
+
+Create Orders table:-
+->mysql>  create table orders(order_no int primary key, purchase_amt decimal(10,2) not null, order_date date not null, customer_id int not null, salesman_id int, foreign key(salesman_id) references salespeople(salesman_id));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> describe orders;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| order_no     | int           | NO   | PRI | NULL    |       |
+| purchase_amt | decimal(10,2) | NO   |     | NULL    |       |
+| order_date   | date          | NO   |     | NULL    |       |
+| customer_id  | int           | NO   |     | NULL    |       |
+| salesman_id  | int           | YES  | MUL | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+
+mysql> insert into orders values(70001, 150.5, '2012-10-05', 3005, 5002), (70009, 270.65, '2012-09-10', 3001, 5005),(70002, 65.26, '2012-10-05', 3002, 5001),(70004, 110.5, '2012-08-17', 3009, 5003),(70007, 948.5, '2012-09-10', 3005, 5002),(70005, 2400.6, '2012-07-27', 3007, 5001),(70008, 5760, '2012-09-10', 3002, 5001),(70010, 1983.43, '2012-10-10', 3004, 5006),(70003, 2480.4, '2012-10-10', 3009, 5003),(70012, 250.45, '2012-06-27', 3008, 5002),(70011, 75.29, '2012-08-17', 3003, 5007),(70013, 3045.6, '2012-04-25', 3002, 5001);
+Query OK, 12 rows affected (0.01 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> select * from orders;
++----------+--------------+------------+-------------+-------------+
+| order_no | purchase_amt | order_date | customer_id | salesman_id |
++----------+--------------+------------+-------------+-------------+
+|    70001 |       150.50 | 2012-10-05 |        3005 |        5002 |
+|    70002 |        65.26 | 2012-10-05 |        3002 |        5001 |
+|    70003 |      2480.40 | 2012-10-10 |        3009 |        5003 |
+|    70004 |       110.50 | 2012-08-17 |        3009 |        5003 |
+|    70005 |      2400.60 | 2012-07-27 |        3007 |        5001 |
+|    70007 |       948.50 | 2012-09-10 |        3005 |        5002 |
+|    70008 |      5760.00 | 2012-09-10 |        3002 |        5001 |
+|    70009 |       270.65 | 2012-09-10 |        3001 |        5005 |
+|    70010 |      1983.43 | 2012-10-10 |        3004 |        5006 |
+|    70011 |        75.29 | 2012-08-17 |        3003 |        5007 |
+|    70012 |       250.45 | 2012-06-27 |        3008 |        5002 |
+|    70013 |      3045.60 | 2012-04-25 |        3002 |        5001 |
++----------+--------------+------------+-------------+-------------+
+
+Create Items table:-
+->mysql> create table items(product_id int primary key, product_name varchar(20) not null, product_price decimal(10,2) not null, product_mcode int not null);
+Query OK, 0 rows affected (1.81 sec)
+
+mysql> describe items;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| product_id    | int           | NO   | PRI | NULL    |       |
+| product_name  | varchar(20)   | NO   |     | NULL    |       |
+| product_price | decimal(10,2) | NO   |     | NULL    |       |
+| product_mcode | int           | NO   |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+
+->mysql> insert into items values(101, "Mother Board", 3200.00, 15),(102, "Key Board", 450.00, 16),(103, "ZIP Drive", 250.00, 14),(104, "Speaker", 550.00, 16),(105, "Monitor", 5000.00, 11),(106, "DVD Drive", 900.00, 12),(107, "CD Drive", 800.00, 12),(108, "Printer", 2600.00, 13),(109, "Refill Cartridge", 350.00, 13),(110, "Mouse", 250.00, 12);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from items;
++------------+------------------+---------------+---------------+
+| product_id | product_name     | product_price | product_mcode |
++------------+------------------+---------------+---------------+
+|        101 | Mother Board     |       3200.00 |            15 |
+|        102 | Key Board        |        450.00 |            16 |
+|        103 | ZIP Drive        |        250.00 |            14 |
+|        104 | Speaker          |        550.00 |            16 |
+|        105 | Monitor          |       5000.00 |            11 |
+|        106 | DVD Drive        |        900.00 |            12 |
+|        107 | CD Drive         |        800.00 |            12 |
+|        108 | Printer          |       2600.00 |            13 |
+|        109 | Refill Cartridge |        350.00 |            13 |
+|        110 | Mouse            |        250.00 |            12 |
++------------+------------------+---------------+---------------+
+
+
+Q.19 From the following table, write a SQL query to find orders that are 
+delivered by a salesperson with ID. 5001. Return ord_no, ord_date, 
+purch_amt.
+->mysql> select order_no, order_date, purchase_amt from orders where salesman_id = 5001;
++----------+------------+--------------+
+| order_no | order_date | purchase_amt |
++----------+------------+--------------+
+|    70002 | 2012-10-05 |        65.26 |
+|    70005 | 2012-07-27 |      2400.60 |
+|    70008 | 2012-09-10 |      5760.00 |
+|    70013 | 2012-04-25 |      3045.60 |
++----------+------------+--------------+
+
+Q.20 From the following table, write a SQL query to select a range of 
+products whose price is in the range Rs.200 to Rs.600. Begin and end 
+values are included. Return pro_id, pro_name, pro_price, and pro_com.
+->mysql> select * from items where product_price between 200 and 600;
++------------+------------------+---------------+---------------+
+| product_id | product_name     | product_price | product_mcode |
++------------+------------------+---------------+---------------+
+|        102 | Key Board        |        450.00 |            16 |
+|        103 | ZIP Drive        |        250.00 |            14 |
+|        104 | Speaker          |        550.00 |            16 |
+|        109 | Refill Cartridge |        350.00 |            13 |
+|        110 | Mouse            |        250.00 |            12 |
++------------+------------------+---------------+---------------+
+
+Q.21 From the following table, write a SQL query to calculate the average 
+price for a manufacturer code of 16. Return avg.
+->mysql> select avg(product_price) as average_price from items where product_mcode = 16;
++---------------+
+| average_price |
++---------------+
+|    500.000000 |
++---------------+
+
+Q.22 From the following table, write a SQL query to display the pro_name 
+as 'Item Name' and pro_priceas 'Price in Rs.'
+->mysql> select product_name as 'Item Name', product_price as 'Price in Rs' from items;
++------------------+-------------+
+| Item Name        | Price in Rs |
++------------------+-------------+
+| Mother Board     |     3200.00 |
+| Key Board        |      450.00 |
+| ZIP Drive        |      250.00 |
+| Speaker          |      550.00 |
+| Monitor          |     5000.00 |
+| DVD Drive        |      900.00 |
+| CD Drive         |      800.00 |
+| Printer          |     2600.00 |
+| Refill Cartridge |      350.00 |
+| Mouse            |      250.00 |
++------------------+-------------+
+
+Q.23 From the following table, write a SQL query to find the items whose 
+prices are higher than or equal to $250. Order the result by product price in 
+descending, then product name in ascending. Return pro_name and 
+pro_price.
+->mysql> select product_name, product_price from items where product_price >= 250 order by product_price DESC, product_name ASC;
++------------------+---------------+
+| product_name     | product_price |
++------------------+---------------+
+| Monitor          |       5000.00 |
+| Mother Board     |       3200.00 |
+| Printer          |       2600.00 |
+| DVD Drive        |        900.00 |
+| CD Drive         |        800.00 |
+| Speaker          |        550.00 |
+| Key Board        |        450.00 |
+| Refill Cartridge |        350.00 |
+| Mouse            |        250.00 |
+| ZIP Drive        |        250.00 |
++------------------+---------------+
+
+Q.24 From the following table, write a SQL query to calculate average 
+price of the items for each company. Return average price and company 
+code.
+->mysql> select avg(product_price) as average_price, product_mcode as 'Product Manufacturer Code' from items group by product_mcode;
++---------------+---------------------------+
+| average_price | Product Manufacturer Code |
++---------------+---------------------------+
+|   3200.000000 |                        15 |
+|    500.000000 |                        16 |
+|    250.000000 |                        14 |
+|   5000.000000 |                        11 |
+|    650.000000 |                        12 |
+|   1475.000000 |                        13 |
++---------------+---------------------------+
+
+
